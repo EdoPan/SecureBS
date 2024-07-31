@@ -1,16 +1,17 @@
 <?php 
+require './backend/utils/db_manager.php';
 
-$books = [
-    [
-        'name' => "Can't Hurt Me",
-        'author' => "David Googins",
-        'price' => 23.99
-    ],
-    [
-        'name' => "Atomic Habits",
-        'author' => "James Clear",
-        'price' => 21.37
-    ]
-];
+$db = DBManager::getInstance();
+$query = 'SELECT * FROM books;';
+$result = $db->query($query);
+
+$books = [];
+
+if ($result->rowCount() > 0) {
+    $books = $result->fetchAll();
+
+} else {
+    $books = ['message' => 'No books available!'];
+}
 
 require './frontend/index.php';

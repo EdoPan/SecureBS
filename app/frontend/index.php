@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,10 +22,16 @@
                 <h2>List of available books</h2>
                 <ul>
                     <?php foreach($books as $book) : ?>
+                    <?php if(array_key_exists('message', $books)) { ?>
+                    <a>
+                        Message: <?=$books['message']; ?>
+                    </a>
+                    <?php } else { ?>
                     <li>
                         <?=$book['name']; ?> - <?=$book['author']; ?>  (<?=$book['price']; ?> €)
                         <a href="#">Add to cart</a>
                     </li>
+                    <?php }; ?>
                     <?php endforeach; ?>
                 </ul>
             </div>

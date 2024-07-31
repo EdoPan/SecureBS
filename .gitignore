@@ -1,2 +1,6 @@
 .DS_STORE
 .vscode
+.env
+/app/vendor
+/app/composer.lock
+/app/composer.json
