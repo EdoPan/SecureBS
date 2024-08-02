@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,17 +7,18 @@ session_start();
     <body>
         <div style="width: 100%;">
             <div style="float: right; width: fit-content; text-align: right;">
-                <a href="./frontend/cart.php">Cart</a><br>
-                <a href="./frontend/login.php">Login</a><br>
-                <a href="./frontend/register.php">Register</a><br>
-                <a href="./frontend/profile.php">Profile</a><br>
-                <a href="#">Logout</a>
+                <a href="./backend/cart.php">Cart</a><br>
+                <a href="./backend/login.php">Login</a><br>
+                <a href="./backend/register.php">Register</a><br>
+                <a href="./backend/profile.php">Profile</a><br>
+                <a href="./backend/logout.php">Logout</a>
             </div>
 
             <div style="float: left; width: fit-content">
                 <h1>Secure Book Store</h>
                 <h2>List of available books</h2>
                 <ul>
+                    <h3>Name - Author - Price - Quantity</h3>
                     <?php foreach($books as $book) : ?>
                     <?php if(array_key_exists('message', $books)) { ?>
                     <a>
@@ -28,7 +26,7 @@ session_start();
                     </a>
                     <?php } else { ?>
                     <li>
-                        <?=$book['name']; ?> - <?=$book['author']; ?>  (<?=$book['price']; ?> €)
+                        <?=$book['name']; ?> - <?=$book['author']; ?>  (<?=$book['price']; ?> €) [<?=$book['quantity']; ?>]
                         <a href="#">Add to cart</a>
                     </li>
                     <?php }; ?>

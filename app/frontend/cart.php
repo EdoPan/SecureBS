@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,16 +11,23 @@ session_start();
                 <a href="./login.php">Login</a><br>
                 <a href="./register.php">Register</a><br>
                 <a href="./profile.php">Profile</a><br>
-                <a href="#">Logout</a>
+                <a href="./logout.php">Logout</a>
             </div>
             <div style="float: left; width: fit-content">
                 <h1>Cart</h1>
                 <form action="#">
                     <ol>
-                        <li><a>Can't Hurt Me - David Googins (23.99 €)</a></li>
-                        <li><a>Atomic Habits - James Clear (21.37 €)</a></li>
+                        <?php foreach($items as $item) : ?>
+                        <?php if(array_key_exists('message', $items)) { ?>
+                        <a>
+                            Message: <?=$items['message']; ?><br><br>
+                        </a>
+                        <?php } else { ?>
+                        <li><?=$item['name']; ?> - <?=$item['author']; ?>  (<?=$item['price']; ?> €)</li><br>
+                        <input type="submit" value="Checkout">
+                        <?php }; ?>
+                        <?php endforeach; ?>
                     </ol>
-                    <input type="submit" value="Checkout">
                 </form>
             </div>
         </div>
