@@ -24,11 +24,12 @@
                         </a>
                         <?php } else { ?>
                         <li><?=$item['name']; ?> - <?=$item['author']; ?>  (<?=$item['price']; ?> €)
-                            <a href="../backend/utils/manage_cart.php?id=<?php echo urlencode($item['id']); ?>&action=2">Remove</a>
+                        <a href="../backend/utils/manage_cart.php?id=<?php echo urlencode($item['book_id']); ?>&action=2">Remove</a>
                         </li><br>
                         <?php }; ?>
                         <?php endforeach; ?>
                         <?php if(!array_key_exists('message', $items)) { ?>
+                        <p><b>Total: </b><?php echo $total; ?> €</p>
                         <input type="submit" value="Checkout">
                         <?php } ?>
                     </ol>

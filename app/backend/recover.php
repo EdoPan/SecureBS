@@ -1,3 +1,3 @@
 <?php
-require '../frontend/recover.php';
 session_start();
+require '../frontend/recover.php';

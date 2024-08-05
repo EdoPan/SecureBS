@@ -1,3 +1,3 @@
 <?php
-require '../frontend/login.php';
 session_start();
+require '../frontend/login.php';

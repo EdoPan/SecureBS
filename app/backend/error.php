@@ -1,3 +1,3 @@
 <?php
-require '../frontend/error.php';
 session_start();
+require '../frontend/error.php';

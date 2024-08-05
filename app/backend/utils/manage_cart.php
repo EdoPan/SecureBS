@@ -34,8 +34,7 @@ if ($action == 1) {
     $db->query($q1);
 
     // Remove book from cart
-    // THIS QUERY DOES NOT WORK IF WE HAVE MORE ITEMS OF THE SAME TYPE
-    $q2 = 'DELETE FROM carts WHERE session_id=' . "'" . session_id() . "' " . 'AND book_id=' . $book_id . ';';
+    $q2 = 'DELETE FROM carts WHERE id = (SELECT MAX(id) FROM carts WHERE session_id=' . "'" . session_id() . "'" . ' AND book_id=' . $book_id .');';
     $db->query($q2);
 
     header('Location: /backend/cart.php');

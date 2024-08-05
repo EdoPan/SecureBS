@@ -1,3 +1,3 @@
 <?php
-require '../frontend/register.php';
 session_start();
+require '../frontend/register.php';
