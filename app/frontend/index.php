@@ -27,7 +27,9 @@
                     <?php } else { ?>
                     <li>
                         <?=$book['name']; ?> - <?=$book['author']; ?>  (<?=$book['price']; ?> €) [<?=$book['quantity']; ?>]
-                        <a href="#">Add to cart</a>
+                        <?php if ($book['quantity'] != 0) { ?>
+                        <a href="../backend/utils/manage_cart.php?id=<?php echo urlencode($book['id']); ?>&action=1">Add to cart</a>
+                        <?php }; ?>
                     </li>
                     <?php }; ?>
                     <?php endforeach; ?>

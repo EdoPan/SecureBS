@@ -15,7 +15,7 @@ INSERT INTO books (name, author, price, quantity) VALUES ("Atomic Habits", "Jame
 CREATE TABLE carts (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
   session_id TEXT NOT NULL,
-  book_id INTEGER NOT NULL 
+  book_id INTEGER NOT NULL
 );
 
 -- insert

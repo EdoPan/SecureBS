@@ -23,10 +23,14 @@
                             Message: <?=$items['message']; ?><br><br>
                         </a>
                         <?php } else { ?>
-                        <li><?=$item['name']; ?> - <?=$item['author']; ?>  (<?=$item['price']; ?> €)</li><br>
-                        <input type="submit" value="Checkout">
+                        <li><?=$item['name']; ?> - <?=$item['author']; ?>  (<?=$item['price']; ?> €)
+                            <a href="../backend/utils/manage_cart.php?id=<?php echo urlencode($item['id']); ?>&action=2">Remove</a>
+                        </li><br>
                         <?php }; ?>
                         <?php endforeach; ?>
+                        <?php if(!array_key_exists('message', $items)) { ?>
+                        <input type="submit" value="Checkout">
+                        <?php } ?>
                     </ol>
                 </form>
             </div>
