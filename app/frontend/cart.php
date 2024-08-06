@@ -15,7 +15,6 @@
             </div>
             <div style="float: left; width: fit-content">
                 <h1>Cart</h1>
-                <form action="#">
                     <ol>
                         <?php foreach($items as $item) : ?>
                         <?php if(array_key_exists('message', $items)) { ?>
@@ -30,10 +29,9 @@
                         <?php endforeach; ?>
                         <?php if(!array_key_exists('message', $items)) { ?>
                         <p><b>Total: </b><?php echo $total; ?> €</p>
-                        <input type="submit" value="Checkout">
+                        <button onclick="location.href='../backend/checkout.php'">Checkout</button>
                         <?php } ?>
                     </ol>
-                </form>
             </div>
         </div>
     </body>

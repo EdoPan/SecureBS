@@ -8,9 +8,11 @@
         <h1>Checkout</h1>
         <h2>Articles</h2>
         <ul>
-            <li><a>Can't Hurt Me - David Googins (23.99 €)</a></li><br>
-            <a>Shipping: 3.99 €</a><br>
-            <a>Total: 27.98 €</a><br><br>
+            <?php foreach($items as $item) : ?>
+            <li><?=$item['name']; ?> - <?=$item['author']; ?>  (<?=$item['price']; ?> €)</li><br>
+            <?php endforeach; ?>
+            <a><b>Shipping: </b><?php echo $shipping ?> €</a><br>
+            <a><b>Total: </b><?php echo $total + $shipping ?> €</a><br><br>
         </ul>
         <h2>Shipping and Payment Info</h2>
         <form action="#">
