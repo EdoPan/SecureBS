@@ -29,7 +29,7 @@
                         <?php endforeach; ?>
                         <?php if(!array_key_exists('message', $items)) { ?>
                         <p><b>Total: </b><?php echo $total; ?> €</p>
-                        <button onclick="location.href='../backend/checkout.php'">Checkout</button>
+                        <button onclick="location.href='./checkout.php'">Checkout</button>
                         <?php } ?>
                     </ol>
             </div>

@@ -4,14 +4,8 @@ session_start();
 
 $db = DBManager::getInstance();
 $query = 'SELECT * FROM books;';
-$result = $db->query($query);
-
-$books = [];
-
-if ($result->rowCount() > 0) {
-    $books = $result->fetchAll();
-
-} else {
+$books = $db->execute_query($query);
+if (empty( $books )) {
     $books = ['message' => 'No books available!'];
 }
 
