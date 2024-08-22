@@ -7,7 +7,7 @@
     <body>
         <div style="text-align: center;">
             <h1>Register</h1>
-            <form action="#">
+            <form action="../backend/register.php" method="post">
                 <label for="email">E-mail:</label><br>
                 <input type="text" id="email" name="email"><br>
                 <label for="username">Username:</label><br>
@@ -20,5 +20,13 @@
             </form>
             <p>Already registered? <a href="./login.php">Login</a></p>
         </div>
+        <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const error = urlParams.get('error');
+        if (error != undefined) {
+            alert(error);
+        }
+    </script>
     </body>
 </html>

@@ -41,6 +41,47 @@ class DBManager {
         if (self::$instance === null) {
             self::$instance = new DBManager();
         }
-        return self::$instance->pdo;
+        return self::$instance;
+    }
+
+    public function execute_query(string $query, array $parameters = [], string $param_types = "") {
+        $stmt = $this->pdo->prepare($query);
+
+        if (!$stmt) {
+            throw new Exception('Prepare failed: ' . implode(', ', $this->pdo->errorInfo()));
+        }
+
+        if (!empty($parameters)) {
+            if (count($parameters) !== strlen($param_types)) {
+                throw new Exception('Mismatched Bind params amount and types amount');
+            }
+
+            foreach ($parameters as $index => $value) {
+                $type = $param_types[$index];
+                $stmt->bindValue($index + 1, $value, $this->getPDOParamType($type));
+            }
+        }
+
+        if (!$stmt->execute()) {
+            throw new Exception('Execute failed: ' . implode(', ', $stmt->errorInfo()));
+        }
+
+        if (preg_match('/^SELECT/', $query)) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } elseif (preg_match('/^(INSERT|UPDATE|DELETE)/', $query)) {
+            return $stmt->rowCount();
+        } else {
+            return null;
+        }
+    }
+
+    private function getPDOParamType(string $type): int {
+        switch ($type) {
+            case 'i': return PDO::PARAM_INT;
+            case 'd': return PDO::PARAM_STR; // Use PDO::PARAM_STR for floating point numbers
+            case 's': return PDO::PARAM_STR;
+            case 'b': return PDO::PARAM_LOB;
+            default: throw new Exception('Unknown parameter type: ' . $type);
+        }
     }
 }

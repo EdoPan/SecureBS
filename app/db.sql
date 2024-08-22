@@ -20,3 +20,11 @@ CREATE TABLE carts (
 
 -- insert
 INSERT INTO carts (session_id, book_id) VALUES ("5ce1pgu3g228tcmlk3vppdqfgt", 1);
+
+-- create
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(20) NOT NULL,
+  password VARCHAR(200) NOT NULL,
+  email VARCHAR(50) NOT NULL
+);
