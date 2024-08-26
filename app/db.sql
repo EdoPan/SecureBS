@@ -27,4 +27,13 @@ CREATE TABLE users (
   username VARCHAR(20) NOT NULL,
   password VARCHAR(200) NOT NULL,
   email VARCHAR(50) NOT NULL
+  
 );
+
+CREATE TABLE recovery_number (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  user_id VARCHAR(20) NOT NULL,
+  number INT NOT NULL,
+  request_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  opertion VARCHAR(20) NOT NULL
+ );

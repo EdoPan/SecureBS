@@ -28,12 +28,7 @@ function redirect_to_page(string $page_name, string $query = NULL) : void {
     // Effettua il redirect all'URL calcolato
     header("Location: $full_url");
     
-    // Chiudi la connessione al database se era aperta, poi esci
-    if (isset($conn)) {
-        $conn->close();
-    }
-    
-    die(); // `die()` è sufficiente per terminare lo script
+    die();
 }
 
 

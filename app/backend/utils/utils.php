@@ -1,6 +1,7 @@
 <?php
 
 include_once "validation.php";
+include_once "mail.php";
 include_once "navigation.php";
 
 
@@ -16,6 +17,7 @@ $regexes = [
     'username' => "/^[a-zA-Z0-9]{3,20}$/",
     'password' => "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/",
     'email' => "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/",
+    'number' => '/\d{6}/',
 ];
 
 $page_regexes = [
@@ -29,4 +31,8 @@ $page_regexes = [
         "username" => $regexes['username'],
         "password" => $regexes['password'],
     ],
+    "validate" => [
+        "username" => $regexes['username'],
+        "number" => $regexes['number'],
+    ]
 ];

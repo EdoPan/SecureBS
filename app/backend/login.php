@@ -32,12 +32,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect_with_message("login", "User not found");
     }
 
-    $password_corrected = password_verify($_POST['password'], $result[0]['password']);
+    $username = $result[0]["username"];
+    $mail = $result[0]["email"];
+    $correct_password = $result[0]["password"];
+
+    if($result[0]["need_verification"] === 1){
+        send_verification_code($username, $mail);
+        redirect_to_page("validate");
+        exit();
+    }
+
+    // check number of attempts of the user
+    $query = "SELECT * FROM login_attempts WHERE attempt_time >= NOW() - INTERVAL 2 MINUTE;";
+    $result = $db->execute_query($query);
+    $attempts = count($result);
+
+
+    $password_corrected = password_verify($_POST['password'], $correct_password);
 
     if ($password_corrected === true) {
         $_SESSION['user_id'] = $result[0]['id'];
         session_regenerate_id(true);
     } else {
+        // password is incorrect, insert the attempt in the DB
+        $query = "INSERT INTO login_attempts (username) VALUES (?)";
+        $params = [$_POST['username']];
+        $param_types = "s";
+        $db->execute_query($query, $params, $param_types);
+        $attempts += 1;
+        if ($attempts > 4) {  
+            send_verification_code($username, $mail);
+            redirect_to_page("validate");
+            exit();
+        }
         redirect_with_message("login", "Password is incorrect");
     }
     
