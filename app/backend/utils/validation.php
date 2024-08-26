@@ -5,8 +5,6 @@ function validate_fields(string $page_name, array $data) : array {
     global $page_regexes;
     $errors = [];
 
-    print_r($data);
-
     // Verifica se la pagina esiste nelle regole
     if (!isset($page_regexes[$page_name])) {
         $errors[] = "Page '$page_name' is not defined.";

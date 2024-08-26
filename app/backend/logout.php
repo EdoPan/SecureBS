@@ -2,6 +2,12 @@
 // Initialize the session.
 // If you are using session_name("something"), don't forget it now!
 session_start();
+include_once 'utils/utils.php';
+
+if (!isset($_SESSION['user_id'])) {
+    redirect_with_message("index", "You are not logged in");
+    exit;
+}
 
 // Unset all of the session variables.
 $_SESSION = [];
@@ -18,4 +24,4 @@ if (ini_get("session.use_cookies")) {
 
 // Finally, destroy the session.
 session_destroy();
-header('Location: /index.php');
+redirect_with_message("index", "You have been logged out");

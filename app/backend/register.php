@@ -5,7 +5,7 @@ require_once './utils/db_manager.php';
 include_once 'utils/utils.php';
 // check if the user is already logged in
 if (isset($_SESSION['user_id'])) {
-    redirect_with_error("index", "You are already logged in");
+    redirect_with_message("index", "You are already logged in");
     exit;
 }
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // check if two passwords are equal
     if ($_POST["password"] !== $_POST["pswd"]) {
-        redirect_with_error("register", "Passwords do not match");
+        redirect_with_message("register", "Passwords do not match");
     }
 
     $errors = array();
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate_fields("register", $data);
 
     if (count($errors) > 0) {
-        redirect_with_error("register", "Invalid fields");
+        redirect_with_message("register", "Invalid fields");
     }
 
     // check the username
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $db->execute_query($query, $params, $param_types);
 
     if(!empty($result)) {
-        redirect_with_error("register", "Username already exists");
+        redirect_with_message("register", "Username already exists");
     }
 
     // check the email
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $db->execute_query($query, $params, $param_types);
 
     if(!empty($result)) {
-        redirect_with_error("register", "Email already exists");
+        redirect_with_message("register", "Email already exists");
     }
 
     // all check passed, now insert the user
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result > 0){
         redirect_to_page("login");
     } else {
-        redirect_with_error("register", "Impossible to create user");
+        redirect_with_message("register", "Impossible to create user");
     }
 
 

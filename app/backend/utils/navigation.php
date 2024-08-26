@@ -5,6 +5,10 @@
 function redirect_to_page(string $page_name, string $query = NULL) : void {
     // Costruisci l'URL per la directory della pagina
     $url = "/app/frontend/" . $page_name . '.php';
+
+    if($page_name === "index"){
+        $url = "/app/index.php";
+    }
     
     // Se è stata fornita una query, aggiungila all'URL
     if (!is_null($query)) {
@@ -36,7 +40,7 @@ function redirect_to_page(string $page_name, string $query = NULL) : void {
 
 //Used as a wrapper to redirect_to_page whenever an error
 //query is needed
-function redirect_with_error(string $page_name, string $error_message) : void{
+function redirect_with_message(string $page_name, string $error_message) : void{
     //Urlencode the error message, and call the redirect function
-    redirect_to_page($page_name, "error=".urlencode($error_message));
+    redirect_to_page($page_name, "msg=".urlencode($error_message));
 }
