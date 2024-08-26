@@ -17,14 +17,15 @@
                 <h1>Profile</h1>
                 <h2>General Info</h2>
                 <ul>
-                    <li><a><b>Username:</b> JohnWick</a></li>
-                    <li><a><b>E-mail:</b> jw@localhost.com</a></li>
+                    <li><a><b>Username:</b> <?php echo $info[0]['username']; ?></a></li>
+                    <li><a><b>E-mail:</b> <?php echo $info[0]['email']; ?></a></li>
                 </ul>
 
                 <h2>Purchased Books</h2>
                 <ul>
-                    <li><a href="#">Can't Hurt Me - David Googins<a> (23.99 €)</a></a></li>
-                    <li><a href="#">Atomic Habits - James Clear<a> (21.37 €)</a></a></li>
+                    <?php foreach($books as $book) : ?>
+                    <li><a href="#"><?php echo $book['name']; ?> - <?php echo $book['author']; ?><a> (<?php echo $book['price']; ?> €)</a></a></li>
+                    <?php endforeach; ?>
                 </ul>
                 <h2>Change Password</h2>
                 <form action="#">

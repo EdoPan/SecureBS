@@ -15,19 +15,21 @@
             <a><b>Total: </b><?php echo $total + $shipping ?> €</a><br><br>
         </ul>
         <h2>Shipping and Payment Info</h2>
-        <form action="#">
+        <form action="../backend/checkout.php" method="post">
             <label for="country">Country:</label><br>
             <input type="text" id="country" name="country"><br>
             <label for="postal_code">Postal Code:</label><br>
             <input type="text" id="postal_code" name="postal_code"><br>
-            <label for="address">Full Address:</label><br>
-            <input type="text" id="address" name="address"><br>
+            <label for="city">City:</label><br>
+            <input type="text" id="city" name="city"><br>
+            <label for="full_address">Full Address:</label><br>
+            <input type="text" id="full_address" name="full_address"><br>
             <label for="card_number">Card number:</label><br>
             <input type="number" id="card_number" name="card_number"><br>            
             <label for="cvv">CVV:</label><br>
             <input type="number" id="cvv" name="cvv"><br>
-            <label for="full_name">Card owner full name:</label><br>
-            <input type="text" id="full_name" name="full_name"><br><br>
+            <label for="card_owner">Card owner full name:</label><br>
+            <input type="text" id="card_owner" name="card_owner"><br><br>
             <input type="submit" value="Buy now">
         </form>
     </body>

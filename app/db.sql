@@ -37,3 +37,16 @@ CREATE TABLE recovery_number (
   request_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
   opertion VARCHAR(20) NOT NULL
  );
+
+-- create
+CREATE TABLE orders (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  user_id INTEGER NOT NULL,
+  book_id INTEGER NOT NULL,
+  country TEXT NOT NULL,
+  postal_code INTEGER NOT NULL,
+  city TEXT NOT NULL,
+  full_address TEXT NOT NULL,
+  card_number INTEGER NOT NULL,
+  card_owner TEXT NOT NULL
+);
