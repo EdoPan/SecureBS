@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $result[0]["username"];
     $mail = $result[0]["email"];
     $correct_password = $result[0]["password"];
+    $user_id = $result[0]["id"];
 
     if($result[0]["need_verification"] === 1){
         send_verification_code($username, $mail);
@@ -51,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password_corrected = password_verify($_POST['password'], $correct_password);
 
     if ($password_corrected === true) {
-        $_SESSION['user_id'] = $result[0]['id'];
+        $_SESSION['user_id'] = $user_id;
         session_regenerate_id(true);
     } else {
         // password is incorrect, insert the attempt in the DB

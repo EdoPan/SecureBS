@@ -4,10 +4,10 @@
 
 function redirect_to_page(string $page_name, string $query = NULL) : void {
     // Costruisci l'URL per la directory della pagina
-    $url = "/app/frontend/" . $page_name . '.php';
+    $url = "/backend/" . $page_name . '.php';
 
     if($page_name === "index"){
-        $url = "/app/index.php";
+        $url = "/index.php";
     }
     
     // Se è stata fornita una query, aggiungila all'URL
