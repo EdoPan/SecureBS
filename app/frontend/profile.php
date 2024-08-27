@@ -24,7 +24,10 @@
                 <h2>Purchased Books</h2>
                 <ul>
                     <?php foreach($books as $book) : ?>
-                    <li><a href="#"><?php echo $book['name']; ?> - <?php echo $book['author']; ?><a> (<?php echo $book['price']; ?> €)</a></a></li>
+                    <li><a href="../backend/utils/download.php?book_id=<?php echo urlencode($book['book_id']); ?>">
+                        <?php echo $book['name']; ?> - <?php echo $book['author']; ?><a> (<?php echo $book['price']; ?> €)</a>
+                        </a>
+                    </li>
                     <?php endforeach; ?>
                 </ul>
                 <h2>Change Password</h2>
