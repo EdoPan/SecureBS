@@ -21,7 +21,7 @@ if (!empty($items)) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    /*
+    
     $errors = [];
     $data = $_POST;
     $errors = validate_fields("checkout", $data);
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (count($errors) > 0) {
         redirect_with_message("checkout", "Invalid fields");
     }
-    */
+    
 
     // Fetch the ids of the books in the cart
     $q1 = 'SELECT * FROM carts WHERE session_id= ?;';
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $params = [$_SESSION['user_id'], $item['book_id'], $_POST['country'], $_POST['postal_code'], 
             $_POST['city'], $_POST['full_address'], substr($_POST['card_number'], -4), $_POST['card_owner']];
-        $param_types = "sisissis";
+        $param_types = "sisissss";
         $r2 = $db->execute_query($q2, $params, $param_types);
 
         // Delete book from cart

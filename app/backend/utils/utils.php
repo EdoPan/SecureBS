@@ -4,14 +4,13 @@ include_once "mail.php";
 include_once "navigation.php";
 
 $regexes = [
-    'firstname' => "/[\\-'A-Z a-zÀ-ÿ]+",
-    'lastname' => "/[\\-'A-Z a-zÀ-ÿ]+",
-    'full_address' => "/[\\-'A-Z a-zÀ-ÿ0-9.,]+",
-    'city' => "/[\\-'A-Z a-zÀ-ÿ.]+",
-    'postal_code' => "\d+",
-    'country' => "[\\-'A-Z a-z]+",
-    'card_number' => "\b\d{4}[\\- ]?\d{4}[\\- ]?\d{4}[\\- ]?\d{4}\b",
-    'cvv' => "\d{3}",
+    'card_owner' => "/[\\-'A-Z a-zÀ-ÿ]+/",
+    'full_address' => "/[\\-'A-Z a-zÀ-ÿ0-9.,]+/",
+    'city' => "/[\\-'A-Za-zÀ-ÿ.]+/",
+    'postal_code' => "/\d{5}/",
+    'country' => "/[\\-'A-Za-z]+/",
+    'card_number' => "/\d{16}/",
+    'cvv' => "/\d{3}/",
     'username' => "/^[a-zA-Z0-9]{3,20}$/",
     'password' => "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/",
     'email' => "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/",
@@ -39,6 +38,6 @@ $page_regexes = [
         "city" => $regexes['city'],
         "full_address" => $regexes['full_address'],
         "card_number" => $regexes['card_number'],
-        "card_owner" => $regexes['firstname']
+        "card_owner" => $regexes['card_owner']
     ]
 ];

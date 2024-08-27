@@ -44,9 +44,9 @@ CREATE TABLE orders (
   user_id INTEGER NOT NULL,
   book_id INTEGER NOT NULL,
   country TEXT NOT NULL,
-  postal_code INTEGER NOT NULL,
+  postal_code VARCHAR(5) NOT NULL,
   city TEXT NOT NULL,
   full_address TEXT NOT NULL,
-  card_number INTEGER NOT NULL,
+  card_number VARCHAR(4) NOT NULL,
   card_owner TEXT NOT NULL
 );
