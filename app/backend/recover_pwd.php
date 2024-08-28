@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param_type = "s";
     $result = $db->execute_query($query, $params, $param_type);
 
-    if(empty($result)) {
+    if (empty($result)) {
         redirect_with_message("login", "Error while retrieving user data");
     }
     $current_pwd = $result[0]["password"];
@@ -40,17 +40,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param_types = "s";
     $result = $db->execute_query($query, $params, $param_types);
 
-    if(empty($result)) {
+    if (empty($result)) {
         redirect_with_message("login", "Number is discarded");
     }
     $correct_number = $result[0]['number'];
-    if($inserted_number != $correct_number) {
+    if ($inserted_number != $correct_number) {
         redirect_with_message("login", "Invalid number");
     }
 
     // check if the new password is different from the current one
     $password_corrected = password_verify($pwd, $current_pwd);
-    if($password_corrected){
+    if ($password_corrected) {
         redirect_with_message("recover", "Error while password check");
     }
 
@@ -68,6 +68,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     redirect_to_page("login");
 }
-
 
 require_once '../frontend/recover_pwd.php';

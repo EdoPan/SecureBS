@@ -10,8 +10,10 @@
                 <a href="./cart.php">Cart</a><br>
                 <a href="./login.php">Login</a><br>
                 <a href="./register.php">Register</a><br>
+                <?php if (isset($_SESSION['user_id'])) { ?>
                 <a href="./profile.php">Profile</a><br>
-                <a href="./logout.php">Logout</a>
+                <a href="./utils/logout.php">Logout</a>
+                <?php } ?>
             </div>
             <div style="float: left; width: fit-content">
                 <h1>Cart</h1>

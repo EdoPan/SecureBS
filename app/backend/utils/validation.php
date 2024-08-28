@@ -1,6 +1,5 @@
 <?php 
 
-
 function validate_fields(string $page_name, array $data) : array {
     global $page_regexes;
     $errors = [];

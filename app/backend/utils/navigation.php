@@ -1,7 +1,5 @@
 <?php
 
-
-
 function redirect_to_page(string $page_name, string $query = NULL) : void {
     // Costruisci l'URL per la directory della pagina
     $url = "/backend/" . $page_name . '.php';
@@ -22,7 +20,6 @@ function redirect_to_page(string $page_name, string $query = NULL) : void {
     // Costruisci l'URL completo, inclusa la porta se non è quella predefinita
     $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
     $port = ($protocol === 'http' && $server_port != 80) || ($protocol === 'https' && $server_port != 443) ? ":$server_port" : '';
-    
     $full_url = "$protocol://$server_name$port$url";
     
     // Effettua il redirect all'URL calcolato
@@ -31,10 +28,6 @@ function redirect_to_page(string $page_name, string $query = NULL) : void {
     die();
 }
 
-
-
-//Used as a wrapper to redirect_to_page whenever an error
-//query is needed
 function redirect_with_message(string $page_name, string $error_message) : void{
     //Urlencode the error message, and call the redirect function
     redirect_to_page($page_name, "msg=".urlencode($error_message));

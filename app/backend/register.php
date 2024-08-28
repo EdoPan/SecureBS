@@ -1,21 +1,12 @@
 <?php
-//session_start();
-require '../frontend/register.php';
 require_once './utils/db_manager.php';
 include_once 'utils/utils.php';
+
 // check if the user is already logged in
 if (isset($_SESSION['user_id'])) {
     redirect_with_message("index", "You are already logged in");
     exit;
 }
-
-/**
- * Register fields:
- * - email
- * - username
- * - pwd
- * - confirm_pwd
- */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -39,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param_types = "s";
     $result = $db->execute_query($query, $params, $param_types);
 
-    if(!empty($result)) {
+    if (!empty($result)) {
         redirect_with_message("register", "Username already exists");
     }
 
@@ -49,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param_types = "s";
     $result = $db->execute_query($query, $params, $param_types);
 
-    if(!empty($result)) {
+    if (!empty($result)) {
         redirect_with_message("register", "Email already exists");
     }
 
@@ -59,11 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param_types = "sss";
     $result = $db->execute_query($query, $params, $param_types);
 
-    if ($result > 0){
+    if ($result > 0) {
         redirect_to_page("login");
     } else {
         redirect_with_message("register", "Impossible to create user");
     }
-
-
 }
+
+require '../frontend/register.php';

@@ -11,7 +11,7 @@
                 <a href="./login.php">Login</a><br>
                 <a href="./register.php">Register</a><br>
                 <a href="./profile.php">Profile</a><br>
-                <a href="./logout.php">Logout</a>
+                <a href="./utils/logout.php">Logout</a>
             </div>
             <div style="float: left; width: fit-content">
                 <h1>Profile</h1>

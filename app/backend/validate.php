@@ -1,5 +1,4 @@
 <?php
-
 require_once './utils/db_manager.php';
 include_once 'utils/utils.php';
 
@@ -20,14 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param_types = "s";
     $result = $db->execute_query($query, $params, $param_types);
 
-    if(empty($result)) {
+    if (empty($result)) {
         redirect_with_message("login", "Number is discarded");
     }
 
     $inserted_number = $_POST['number'];
     $correct_number = $result[0]['number'];
 
-    if($inserted_number == $correct_number){
+    if ($inserted_number == $correct_number) {
         $query = "DELETE FROM recovery_number WHERE username = ? AND operation='login'";
         $params = [$_POST['username']];
         $param_types = "s";
@@ -41,5 +40,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         redirect_with_message("validate", "Invalid number");
     }
-
 }

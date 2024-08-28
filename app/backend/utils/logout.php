@@ -1,8 +1,6 @@
 <?php
-// Initialize the session.
-// If you are using session_name("something"), don't forget it now!
+include_once './utils.php';
 session_start();
-include_once 'utils/utils.php';
 
 if (!isset($_SESSION['user_id'])) {
     redirect_with_message("index", "You are not logged in");

@@ -1,8 +1,7 @@
 <?php
-session_start();
 require_once './utils/db_manager.php';
 include_once 'utils/utils.php';
-require '../frontend/recover.php';
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // validate input fields
@@ -21,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param_types = "s";
     $result = $db->execute_query($query, $params, $param_types);
 
-    if(empty($result)) {
+    if (empty($result)) {
         redirect_with_message("login", "Error while retrieving user data");
     }
 
@@ -31,3 +30,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     send_recover_password_code($username, $email);
     redirect_to_page("recover_pwd");
 }
+
+require '../frontend/recover.php';

@@ -1,8 +1,7 @@
 <?php
-session_start();
-require '../frontend/login.php';
 require_once './utils/db_manager.php';
 include_once 'utils/utils.php';
+session_start();
 
 // check if the user is already logged in
 if (isset($_SESSION['user_id'])) {
@@ -28,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param_types = "s";
     $result = $db->execute_query($query, $params, $param_types);
 
-    if(empty($result)) {
+    if (empty($result)) {
         redirect_with_message("login", "User not found");
     }
 
@@ -37,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correct_password = $result[0]["password"];
     $user_id = $result[0]["id"];
 
-    if($result[0]["need_verification"] === 1){
+    if ($result[0]["need_verification"] === 1){
         send_verification_code($username, $mail);
         redirect_to_page("validate");
         exit();
@@ -81,3 +80,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     redirect_to_page("index");
 }
+
+require '../frontend/login.php';

@@ -1,17 +1,14 @@
 <?php
 require './utils/db_manager.php';
 include_once 'utils/utils.php';
-
 session_start();
 
 $db = DBManager::getInstance();
-
 
 if (!isset($_SESSION['user_id'])) {
     redirect_with_message("login", "You are not logged in");
     exit;
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // validate input fields

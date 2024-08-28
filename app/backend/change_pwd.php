@@ -1,8 +1,7 @@
 <?php
-session_start();
-
 require_once './utils/db_manager.php';
 include_once 'utils/utils.php';
+session_start();
 
 // check if the user is already logged in
 if (!isset($_SESSION['user_id'])) {
@@ -33,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param_types = "i";
     $result = $db->execute_query($query, $params, $param_types);
 
-    if(empty($result)) {
+    if (empty($result)) {
         redirect_with_message("profile", "Error while retrieving user data");
     }
 
@@ -45,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param_types = "s";
     $result = $db->execute_query($query, $params, $param_types);
 
-    if(empty($result)) {
+    if (empty($result)) {
         redirect_with_message("login", "Number is discarded");
     }
 
@@ -53,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_pwd = $_SESSION["new_pswd"];
     // print correct_number and number
     echo "correct_number: $correct_number, number: $number";
-    if($number == $correct_number) {
+    if ($number == $correct_number) {
         $query = "DELETE FROM recovery_number WHERE username = ? AND operation='change'";
         $params = [$username];
         $param_types = "s";
@@ -64,11 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $param_types = "ss";
         $db->execute_query($query, $params, $param_types);
         redirect_to_page("index");
-    }else {
+    } else {
         redirect_with_message("change_pwd", "Invalid number, correct_number: $correct_number, number: $number");
     }
-
-
 }
 
 require '../frontend/change_pwd.php';
