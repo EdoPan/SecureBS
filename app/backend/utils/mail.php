@@ -65,7 +65,7 @@ function send_verification_code($username, $mail){
     try {
         $randomNumber = random_int(1, 1000000000); 
     } catch (Exception $e) {
-        echo "Errore nella generazione del numero casuale: ", $e->getMessage();
+        //echo "Errore nella generazione del numero casuale: ", $e->getMessage();
         redirect_with_message("login", "Error, retry later");
     }
 
@@ -80,6 +80,56 @@ function send_verification_code($username, $mail){
     // send the email to the user
     $subject = "Secure Book Store - Login Validation";
     $message = "Hello $username, <br> We've sended to you an email with a number, please insert the number in the form to validate your profile <br> Number: $randomNumber";
+
+    send_mail($mail, $username, $subject, $message);
+}
+
+function send_change_password_code($username, $mail){
+    // generate the random number
+    $randomNumber = 0;
+    try {
+        $randomNumber = random_int(1, 1000000000); 
+    } catch (Exception $e) {
+        //echo "Errore nella generazione del numero casuale: ", $e->getMessage();
+        redirect_with_message("login", "Error, retry later");
+    }
+
+    // save the generated number
+    $query = "INSERT INTO recovery_number (username, number, operation) VALUES (?, ?, ?)";
+    $params = [$username, $randomNumber, "change"];
+    $params_types = "sis";
+
+    $db = DBManager::getInstance();
+    $db->execute_query($query, $params, $params_types);
+
+    // send the email to the user
+    $subject = "Secure Book Store - Change Password";
+    $message = "Hello $username, <br> We've sended to you an email with a number, please insert the number in the form to change the password <br> Number: $randomNumber";
+
+    send_mail($mail, $username, $subject, $message);
+}
+
+function send_recover_password_code($username, $mail){
+    // generate the random number
+    $randomNumber = 0;
+    try {
+        $randomNumber = random_int(1, 1000000000); 
+    } catch (Exception $e) {
+        //echo "Errore nella generazione del numero casuale: ", $e->getMessage();
+        redirect_with_message("login", "Error, retry later");
+    }
+
+    // save the generated number
+    $query = "INSERT INTO recovery_number (username, number, operation) VALUES (?, ?, ?)";
+    $params = [$username, $randomNumber, "recover"];
+    $params_types = "sis";
+
+    $db = DBManager::getInstance();
+    $db->execute_query($query, $params, $params_types);
+
+    // send the email to the user
+    $subject = "Secure Book Store - Change Password";
+    $message = "Hello $username, <br> We've sended to you an email with a number, please insert the number in the form to change the password <br> Number: $randomNumber";
 
     send_mail($mail, $username, $subject, $message);
 }

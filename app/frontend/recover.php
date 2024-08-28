@@ -7,7 +7,7 @@
     <body>
         <div style="text-align: center;">
             <h1>Recover</h1>
-            <form action="#">
+            <form action="../backend/recover.php" method="post">
                 <label for="email">E-mail:</label><br>
                 <input type="text" id="email" name="email"><br><br>
                 <input type="submit" value="Recover">

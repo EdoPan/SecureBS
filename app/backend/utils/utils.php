@@ -39,5 +39,21 @@ $page_regexes = [
         "full_address" => $regexes['full_address'],
         "card_number" => $regexes['card_number'],
         "card_owner" => $regexes['card_owner']
-    ]
+    ],
+    "change_pwd" => [
+        "current_pswd" => $regexes['password'],
+        "new_pswd" => $regexes['password'],
+    ],
+    "validate_change_pwd" => [
+        "number" => $regexes['number'],
+    ],
+    "recover" => [
+        "email" => $regexes['email'],
+    ],
+    "recover_pwd" => [
+        "number" => $regexes['number'],
+        "pwd" => $regexes['password'],
+        "new_pwd" => $regexes['password'],
+        "username" => $regexes["username"],
+    ],
 ];

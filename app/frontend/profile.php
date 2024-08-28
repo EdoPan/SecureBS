@@ -31,7 +31,7 @@
                     <?php endforeach; ?>
                 </ul>
                 <h2>Change Password</h2>
-                <form action="#">
+                <form action="../backend/profile.php" method="post">
                     <label for="current_pswd">Current password:</label><br>
                     <input type="password" id="current_pswd" name="current_pswd"><br>
                     <label for="new_pswd">New password:</label><br>
