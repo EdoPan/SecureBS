@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect_with_message("register", "Passwords do not match");
     }
 
-    $errors = array();
+    $errors = [];
     $data = $_POST;
     $errors = validate_fields("register", $data);
 

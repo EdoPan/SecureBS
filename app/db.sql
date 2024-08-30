@@ -30,6 +30,7 @@ CREATE TABLE users (
   
 );
 
+-- create
 CREATE TABLE recovery_number (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
   user_id VARCHAR(20) NOT NULL,
@@ -38,10 +39,11 @@ CREATE TABLE recovery_number (
   opertion VARCHAR(20) NOT NULL
  );
 
+-- create
 CREATE TABLE login_attempts (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(20) NOT NULL,
-  attempt_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  attempt_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 -- create

@@ -17,7 +17,7 @@ if (!isset($_SESSION['new_pswd'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // validate input fields
-    $errors = array();
+    $errors = [];
     $data = $_POST;
     $errors = validate_fields("validate_change_pwd", $data);
 

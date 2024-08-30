@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // validate input fields
-    $errors = array();
+    $errors = [];
     $data = $_POST;
     $errors = validate_fields("change_pwd", $data);
 

@@ -12,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // validate input fields
-    $errors = array();
+    $errors = [];
     $data = $_POST;
     $errors = validate_fields("login", $data);
 
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($password_corrected === true) {
         $_SESSION['user_id'] = $user_id;
-        session_regenerate_id(true);
+        //session_regenerate_id(true);
     } else {
         // password is incorrect, insert the attempt in the DB
         $query = "INSERT INTO login_attempts (username) VALUES (?)";
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         redirect_with_message("login", "Password is incorrect");
     }
-    
+    /*
     // check if it's needed to regenrate the session id
     if (!isset($_SESSION['last_generated'])) {
         $_SESSION['last_generated'] = time();
@@ -77,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_regenerate_id(true);
         $_SESSION['last_generated'] = time();
     }
+    */
     
     redirect_to_page("index");
 }

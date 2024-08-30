@@ -4,7 +4,7 @@ include_once 'utils/utils.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // validate input fields
-    $errors = array();
+    $errors = [];
     $data = $_POST;
     $errors = validate_fields("recover_pwd", $data);
 
