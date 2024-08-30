@@ -41,3 +41,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect_with_message("validate", "Invalid number");
     }
 }
+
+require '../frontend/validate.php';
