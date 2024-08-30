@@ -1,6 +1,9 @@
 <?php
 require_once './utils/db_manager.php';
+require_once './utils/logger.php';
 include_once 'utils/utils.php';
+
+$logger = Log::getInstance();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // validate input fields
@@ -65,6 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $params = [$username];
     $param_types = "s";
     $db->execute_query($query, $params, $param_types);
+
+    $logger->info("User requested a password recovery", ['username' => $username]);
 
     redirect_to_page("login");
 }

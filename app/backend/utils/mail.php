@@ -1,9 +1,11 @@
 <?php
+require_once __DIR__ . '/logger.php';
+require __DIR__ . '/../../vendor/autoload.php';
+
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
-require __DIR__ . '/../../vendor/autoload.php';
 function send_mail($email, $name, $subject, $message) : bool {    
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
     $dotenv->load();
@@ -82,6 +84,10 @@ function send_verification_code($username, $mail){
     $message = "Hello $username, <br> We've sended to you an email with a number, please insert the number in the form to validate your profile <br> Number: $randomNumber";
 
     send_mail($mail, $username, $subject, $message);
+
+    $logger = Log::getInstance();
+    $logger->info("Verification code sended", ['username' => $username, 'random_number' => $randomNumber]);
+
 }
 
 function send_change_password_code($username, $mail){
@@ -107,6 +113,9 @@ function send_change_password_code($username, $mail){
     $message = "Hello $username, <br> We've sended to you an email with a number, please insert the number in the form to change the password <br> Number: $randomNumber";
 
     send_mail($mail, $username, $subject, $message);
+
+    $logger = Log::getInstance();
+    $logger->info("Change code sended", ['username' => $username, 'random_number' => $randomNumber]);
 }
 
 function send_recover_password_code($username, $mail){
@@ -132,4 +141,7 @@ function send_recover_password_code($username, $mail){
     $message = "Hello $username, <br> We've sended to you an email with a number, please insert the number in the form to change the password <br> Number: $randomNumber";
 
     send_mail($mail, $username, $subject, $message);
+
+    $logger = Log::getInstance();
+    $logger->info("Recover code sended", ['username' => $username, 'random_number' => $randomNumber]);
 }

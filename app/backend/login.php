@@ -1,7 +1,10 @@
 <?php
 require_once './utils/db_manager.php';
+require_once './utils/logger.php';
 include_once 'utils/utils.php';
 require './utils/config.php';
+
+$logger = Log::getInstance();
 
 // check if the user is already logged in
 if (isset($_SESSION['user_id'])) {
@@ -78,6 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['last_generated'] = time();
     }
     */
+
+    // Log user log-in
+    $logger->info("User logged in", ['username' => $_POST["username"]]);
     
     redirect_to_page("index");
 }

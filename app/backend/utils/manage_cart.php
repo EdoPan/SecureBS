@@ -1,6 +1,10 @@
 <?php
 require './db_manager.php';
+require_once './logger.php';
+
 session_start();
+
+$logger = Log::getInstance();
 
 $db = DBManager::getInstance();
 
@@ -44,6 +48,8 @@ if ($action == 1) {
     $param_types = 'ii';
     $db->execute_query($q2, $params, $param_types);
 
+    $logger->info("User added a book to the cart", ['user_id' => $_SESSION['user_id'], 'book_id' => $book_id]);
+
     header('Location: /index.php');
 
 } else if ($action == 2) {
@@ -69,6 +75,8 @@ if ($action == 1) {
     $params = [session_id(), $book_id];
     $param_types = 'si';
     $db->execute_query($q2, $params, $param_types);
+
+    $logger->info("User removed a book from to the cart", ['user_id' => $_SESSION['user_id'], 'book_id' => $book_id]);
 
     header('Location: /backend/cart.php');
 }

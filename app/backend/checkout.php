@@ -1,7 +1,10 @@
 <?php
 require './utils/db_manager.php';
+require_once './utils/logger.php';
 require_once 'utils/utils.php';
 require './utils/config.php';
+
+$logger = Log::getInstance();
 
 $db = DBManager::getInstance();
 $q0 = 'SELECT * FROM books INNER JOIN carts WHERE session_id = ? AND books.id=carts.book_id;';
@@ -52,6 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $params = [session_id(), $item['book_id']];
         $param_types = "si";
         $r3 = $db->execute_query($q3, $params, $param_types);
+        
+        // Log orders
+        $logger->info("User placed an order", ['username' => $_POST["username"], 'book_id' => $item['book_id']]);
     }
     redirect_to_page("profile");
 }

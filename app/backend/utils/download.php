@@ -1,7 +1,10 @@
 <?php
 require './db_manager.php';
+require_once './logger.php';
 require_once './utils.php';
 session_start();
+
+$logger = Log::getInstance();
 
 $db = DBManager::getInstance();
 $book_id = $_GET['book_id'];
@@ -16,6 +19,9 @@ if (!empty($result)) {
     header("Content-Disposition:attachment;filename=\"{$book_id}.pdf\"");
     header('Content-Length: ' . filesize($filename));
     readfile($filename);
+
+    $logger->info("User requested a download", ['username' => $username, 'file' => $filename]);
+
 } else {
     redirect_with_message("profile", "Something went wrong");
 }

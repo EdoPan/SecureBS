@@ -8,8 +8,10 @@
         <div style="width: 100%;">
             <div style="float: right; width: fit-content; text-align: right;">
                 <a href="./cart.php">Cart</a><br>
+                <?php if (!isset($_SESSION['user_id'])) { ?>
                 <a href="./login.php">Login</a><br>
                 <a href="./register.php">Register</a><br>
+                <?php } ?>
                 <a href="./profile.php">Profile</a><br>
                 <a href="./utils/logout.php">Logout</a>
             </div>

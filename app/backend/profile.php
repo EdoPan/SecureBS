@@ -1,7 +1,10 @@
 <?php
 require './utils/db_manager.php';
+require_once './utils/logger.php';
 include_once 'utils/utils.php';
 require './utils/config.php';
+
+$logger = Log::getInstance();
 
 $db = DBManager::getInstance();
 
@@ -44,6 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     send_change_password_code($username, $email);
     $_SESSION["new_pswd"] = password_hash($new_pwd, PASSWORD_DEFAULT);
+
+    $logger->info("User requested a password change", ['username' => $username]);
 
     redirect_to_page("change_pwd");
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {

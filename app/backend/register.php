@@ -1,5 +1,6 @@
 <?php
 require_once './utils/db_manager.php';
+require_once './utils/logger.php';
 include_once 'utils/utils.php';
 
 // check if the user is already logged in
@@ -51,6 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $db->execute_query($query, $params, $param_types);
 
     if ($result > 0) {
+        // Log user registration
+        $logger = Log::getInstance();
+        $logger->info("User registration", ['username' => $_POST["username"]]);
+
         redirect_to_page("login");
     } else {
         redirect_with_message("register", "Impossible to create user");

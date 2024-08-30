@@ -6,3 +6,6 @@ dbData/
 #docker-compose.yaml
 certs/*
 certs/
+docker-compose.yaml
+logs/
+

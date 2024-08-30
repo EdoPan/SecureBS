@@ -1,7 +1,10 @@
 <?php
 require_once './utils/db_manager.php';
+require_once './utils/logger.php';
 include_once 'utils/utils.php';
 require './utils/config.php';
+
+$logger = Log::getInstance();
 
 // check if the user is already logged in
 if (!isset($_SESSION['user_id'])) {
@@ -45,6 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $db->execute_query($query, $params, $param_types);
 
     if (empty($result)) {
+
+        $logger->info("User tried to change password with an expired number", ['username' => $username, 'number' => $number]);
+
         redirect_with_message("login", "Number is discarded");
     }
 
@@ -62,6 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $params = [$new_pwd, $_POST['username']];
         $param_types = "ss";
         $db->execute_query($query, $params, $param_types);
+
+        $logger->info("User succesfully changed password", ['username' => $username]);
+        
         redirect_to_page("index");
     } else {
         redirect_with_message("change_pwd", "Invalid number, correct_number: $correct_number, number: $number");
