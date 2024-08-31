@@ -61,7 +61,7 @@ if ($action == 1) {
 
 
     if(isset($result[0])){
-        $quantity = $result[0]['quantity'] - 1;
+        $quantity = $result[0]['quantity'] + 1;
     }
 
     // Update book quantity

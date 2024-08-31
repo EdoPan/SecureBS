@@ -1,24 +1,19 @@
 <?php
-
 use Monolog\Level;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Monolog\Handler\FirePHPHandler;
+
 
 class Log {
-
     private static $instance = null;
- 
-    public static function getInstance(){
-        if (self::$instance === null) {
-            self::$instance = new Logger('store');
-            switch (basename(__DIR__)) {
-                case 'utils':
-                    self::$instance->pushHandler(new StreamHandler('../../../logs/store.log', Level::Info));
-                    break;
-                case 'backend':
-                    self::$instance->pushHandler(new StreamHandler('../logs/store.log', Level::Info));
-                    break;
-            }
+
+    public static function getInstance() {
+        if (self::$instance === null) {     
+            $logger = new Logger('logger');
+            $logger->pushHandler(new StreamHandler(__DIR__ . '/../../logs/store.log', Level::Debug));
+            $logger->pushHandler(new FirePHPHandler());
+            self::$instance = $logger;
         }
         return self::$instance;
     }
