@@ -3,4 +3,6 @@
 .env
 /app/vendor
 dbData/
-docker-compose.yaml
+#docker-compose.yaml
+certs/*
+certs/
