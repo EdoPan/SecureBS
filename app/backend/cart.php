@@ -1,9 +1,9 @@
 <?php 
 require './utils/db_manager.php';
-session_start();
+require './utils/config.php';
 
 $db = DBManager::getInstance();
-$query = 'SELECT * FROM books INNER JOIN carts WHERE session_id = ? AND books.id=carts.book_id;';
+$query = 'SELECT * FROM books INNER JOIN carts WHERE session_id = ? AND books.id=carts.book_id AND carts.created_at > NOW() - INTERVAL 15 MINUTE;';
 $params = [session_id()];
 $param_types = 's';
 $items = $db->execute_query($query, $params, $param_types);

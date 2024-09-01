@@ -1,7 +1,7 @@
 <?php
 require './utils/db_manager.php';
 include_once 'utils/utils.php';
-session_start();
+require './utils/config.php';
 
 $db = DBManager::getInstance();
 

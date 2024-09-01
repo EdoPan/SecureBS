@@ -13,5 +13,16 @@
                 <input type="submit" value="Recover">
             </form>
         </div>
+        <script>
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const error = urlParams.get('msg');
+            if (error != undefined) {
+                alert(error);
+                let url = new URL(window.location);
+                url.searchParams.delete('msg');
+                window.location.href = url.toString();
+            }
+        </script>
     </body>
 </html>

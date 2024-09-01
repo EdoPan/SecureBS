@@ -32,5 +32,16 @@
             <input type="text" id="card_owner" name="card_owner"><br><br>
             <input type="submit" value="Buy now">
         </form>
+        <script>
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const error = urlParams.get('msg');
+            if (error != undefined) {
+                alert(error);
+                let url = new URL(window.location);
+                url.searchParams.delete('msg');
+                window.location.href = url.toString();
+            }
+        </script>
     </body>
 </html>

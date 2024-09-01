@@ -15,12 +15,27 @@ if ($action == 1) {
     $result = $db->execute_query($q0, $params, $param_types);
     
     // Add to cart
-    if(isset($result[0])){
+    if(!empty($result)){
         $quantity = $result[0]['quantity'] - 1;
     }
-    $q1 = 'INSERT INTO carts (session_id, book_id) VALUES (?,?);';
-    $params = [session_id(), $book_id];
-    $param_types = 'si';
+
+    // check if exists already the cart
+    $q0 = 'SELECT * FROM carts WHERE session_id= ? ORDER BY created_at DESC;';
+    $params = [session_id()];
+    $param_types = 's';
+    $result = $db->execute_query($q0, $params, $param_types);
+    $ts = null;
+    if(!empty($result)){
+        $ts = $result[0]['created_at'];
+    }
+
+    // insert into cart
+    $q1 = 'INSERT INTO carts (session_id, book_id, created_at) VALUES (?,?,?);';
+    if($ts == null){
+        $ts = date('Y-m-d H:i:s');
+    }
+    $params = [session_id(), $book_id, $ts];
+    $param_types = 'sis';
     $db->execute_query($q1, $params, $param_types);
 
     // Update book quantity

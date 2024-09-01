@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $db->execute_query($query, $params, $param_types);
 
     if (!empty($result)) {
-        redirect_with_message("register", "Username already exists");
+        redirect_with_message("register", "Username not valid");
     }
 
     // check the email
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $db->execute_query($query, $params, $param_types);
 
     if (!empty($result)) {
-        redirect_with_message("register", "Email already exists");
+        redirect_with_message("register", "Email not valid");
     }
 
     // all check passed, now insert the user

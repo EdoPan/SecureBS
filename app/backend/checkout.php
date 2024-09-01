@@ -1,7 +1,7 @@
 <?php
 require './utils/db_manager.php';
 require_once 'utils/utils.php';
-session_start();
+require './utils/config.php';
 
 $db = DBManager::getInstance();
 $q0 = 'SELECT * FROM books INNER JOIN carts WHERE session_id = ? AND books.id=carts.book_id;';

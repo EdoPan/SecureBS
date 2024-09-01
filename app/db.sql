@@ -58,3 +58,42 @@ CREATE TABLE orders (
   card_number VARCHAR(4) NOT NULL,
   card_owner TEXT NOT NULL
 );
+
+SET GLOBAL event_scheduler = ON;
+
+DELIMITER //
+
+CREATE EVENT IF NOT EXISTS cleanup_expired_carts
+ON SCHEDULE EVERY 15 MINUTE
+DO
+BEGIN
+    DECLARE done INT DEFAULT 0;
+    DECLARE v_cart_id INT;
+    DECLARE v_book_id INT;
+
+    DECLARE cur CURSOR FOR 
+        SELECT id, book_id FROM carts WHERE created_at < NOW() - INTERVAL 15 MINUTE;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    OPEN cur;
+
+    read_loop: LOOP
+        FETCH cur INTO v_cart_id, v_book_id;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        -- Aggiorna la quantità disponibile del libro
+        UPDATE books 
+        SET quantity = quantity + 1 
+        WHERE id = v_book_id;
+
+        -- Rimuovi l'articolo dal carrello
+        DELETE FROM carts WHERE id = v_cart_id;
+    END LOOP;
+
+    CLOSE cur;
+END //
+
+DELIMITER ;

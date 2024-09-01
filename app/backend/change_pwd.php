@@ -1,7 +1,7 @@
 <?php
 require_once './utils/db_manager.php';
 include_once 'utils/utils.php';
-session_start();
+require './utils/config.php';
 
 // check if the user is already logged in
 if (!isset($_SESSION['user_id'])) {
