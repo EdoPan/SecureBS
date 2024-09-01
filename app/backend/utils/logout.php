@@ -1,6 +1,11 @@
 <?php
 include_once './utils.php';
+require_once './logger.php';
 session_start();
+
+$logger = Log::getInstance();
+$user_id = $_SESSION['user_id'];
+
 
 if (!isset($_SESSION['user_id'])) {
     redirect_with_message("index", "You are not logged in");
@@ -22,4 +27,5 @@ if (ini_get("session.use_cookies")) {
 
 // Finally, destroy the session.
 session_destroy();
+$logger->info("User logged out", ['user_id' => $user_id]);
 redirect_with_message("index", "You have been logged out");

@@ -23,5 +23,6 @@ if (!empty($result)) {
     $logger->info("User requested a download", ['username' => $username, 'file' => $filename]);
 
 } else {
+    $logger->warning("User requested a download for a not owned book", ['username' => $username, 'file' => $filename]);
     redirect_with_message("profile", "Something went wrong");
 }

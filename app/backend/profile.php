@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate_fields("change_pwd", $data);
 
     if (count($errors) > 0) {
+        $logger->warning("Invalid fields for password change", ['session_id' => $_SESSION['id'], 'errors' => $errors, 'data' => $data]);
         redirect_with_message("profile", "Invalid fields");
     }
 
@@ -48,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     send_change_password_code($username, $email);
     $_SESSION["new_pswd"] = password_hash($new_pwd, PASSWORD_DEFAULT);
 
-    $logger->info("User requested a password change", ['username' => $username]);
+    $logger->info("User requested a password change", ['user_id' => $_SESSION['user_id']]);
 
     redirect_to_page("change_pwd");
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {

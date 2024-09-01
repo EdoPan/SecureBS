@@ -2,6 +2,9 @@
 require_once './utils/db_manager.php';
 require_once './utils/logger.php';
 include_once 'utils/utils.php';
+session_start();
+
+$logger = Log::getInstance();
 
 // check if the user is already logged in
 if (isset($_SESSION['user_id'])) {
@@ -21,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate_fields("register", $data);
 
     if (count($errors) > 0) {
+        $logger->warning("Invalid fields registration", ['session_id' => $_SESSION['id'], 'errors' => $errors, 'data' => $data]);
         redirect_with_message("register", "Invalid fields");
     }
 

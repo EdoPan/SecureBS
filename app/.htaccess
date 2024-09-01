@@ -1,3 +1,55 @@
+# Protezione cookie di sessione
+php_value session.cookie_httponly 1
+php_value session.cookie_secure 1
+
+# Impedire la visualizzazione del file .htaccess
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Disabilitare l'elenco delle directory
+Options -Indexes
+
+# Proteggere contro attacchi XSS e MIME sniffing
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "no-referrer-when-downgrade"
+    Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# Abilitare la protezione CSRF e HSTS
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+</IfModule>
+
+# Proteggere l'accesso a file sensibili
+<FilesMatch "(\.ini|\.log|\.sh|\.sql|\.bak|\.old|\.json|\.xml|\.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Abilitare HTTPS se non già fatto
 RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Limita il numero di richieste per prevenire attacchi DoS
+<IfModule mod_evasive.c>
+    DOSHashTableSize 3097
+    DOSPageCount 2
+    DOSSiteCount 50
+    DOSPageInterval 1
+    DOSSiteInterval 1
+    DOSBlockingPeriod 10
+</IfModule>
+
+# Disabilitare tracce e opzioni HTTP inutili
+TraceEnable Off
+Header set Allow "GET,POST"
+
+# Protezione contro attacchi di clickjacking
+<IfModule mod_headers.c>
+    Header always append X-Frame-Options DENY
+</IfModule>

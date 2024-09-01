@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate_fields("validate_change_pwd", $data);
 
     if (count($errors) > 0) {
+        $logger->warning("Invalid fields during password change", ['session_id' => $_SESSION['id'], 'user_id' => $_SESSION['user_id'], 'errors' => $errors, 'data' => $data]);
         redirect_to_page("profile");
     }
 
@@ -49,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($result)) {
 
-        $logger->info("User tried to change password with an expired number", ['username' => $username, 'number' => $number]);
+        $logger->warning("User tried to change password with an expired number", ['username' => $username, 'number' => $number]);
 
         redirect_with_message("login", "Number is discarded");
     }
@@ -73,6 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         redirect_to_page("index");
     } else {
+        $logger->warning("User inserted an invalid number during changed password", ['username' => $username, 'wrong_number' => $number, 'correct_number' => $correct_number]);
+
         redirect_with_message("change_pwd", "Invalid number, correct_number: $correct_number, number: $number");
     }
 }

@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate_fields("checkout", $data);
 
     if (count($errors) > 0) {
+        $logger->warning("Invalid fields during checkout", ['session_id' => $_SESSION['id'], 'user_id' => $_SESSION['user_id'], 'errors' => $errors, 'data' => $data]);
         redirect_with_message("checkout", "Invalid fields");
     }
     
