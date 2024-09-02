@@ -27,7 +27,7 @@ Options -Indexes
 # Proteggere l'accesso a file sensibili
 <FilesMatch "(\.ini|\.log|\.sh|\.sql|\.bak|\.old|\.json|\.xml|\.php)$">
     Order allow,deny
-    Deny from all
+    Allow from all
 </FilesMatch>
 
 # Abilitare HTTPS se non già fatto
@@ -46,8 +46,8 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
 # Disabilitare tracce e opzioni HTTP inutili
-TraceEnable Off
-Header set Allow "GET,POST"
+# TraceEnable On
+# Header set Allow "GET,POST"
 
 # Protezione contro attacchi di clickjacking
 <IfModule mod_headers.c>
