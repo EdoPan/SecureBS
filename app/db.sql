@@ -18,9 +18,6 @@ CREATE TABLE carts (
   book_id INTEGER NOT NULL
 );
 
--- insert
-INSERT INTO carts (session_id, book_id) VALUES ("5ce1pgu3g228tcmlk3vppdqfgt", 1);
-
 -- create
 CREATE TABLE users (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,

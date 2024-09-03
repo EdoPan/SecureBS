@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate_fields("validate", $data);
 
     if (count($errors) > 0) {
-        $logger->warning("Invalid fields in user verification for login", ['session_id' => $_SESSION['id'], 'errors' => $errors, 'data' => $data]);
+        $logger->warning("Invalid fields in user verification for login", ['session_id' => session_id(), 'errors' => $errors, 'data' => $data]);
         redirect_with_message("validate", "Invalid fields");
     }
 
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $db->execute_query($query, $params, $param_types);
 
     if (empty($result)) {
-        $logger->warning("User inserted an expired number during validation process", ['session_id' => $_SESSION['id'], 'username' => $_POST['username']]);
+        $logger->warning("User inserted an expired number during validation process", ['session_id' => session_id(), 'username' => $_POST['username']]);
         redirect_with_message("login", "Number is discarded");
     }
 
@@ -42,11 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $param_types = "s";
         $db->execute_query($query, $params, $param_types);
 
-        $logger->info("User inserted a valid number", ['session_id' => $_SESSION['id'], 'username' => $_POST['username'], 'number' => $inserted_number]);
+        $logger->info("User inserted a valid number", ['session_id' => session_id(), 'username' => $_POST['username'], 'number' => $inserted_number]);
 
         redirect_to_page("index");
     } else {
-        $logger->warning("User inserted an invalid number", ['session_id' => $_SESSION['id'], 'username' => $_POST['username'], 'number' => $inserted_number]);
+        $logger->warning("User inserted an invalid number", ['session_id' => session_id(), 'username' => $_POST['username'], 'number' => $inserted_number]);
         redirect_with_message("validate", "Invalid number");
     }
 }

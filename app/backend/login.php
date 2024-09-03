@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate_fields("login", $data);
 
     if (count($errors) > 0) {
-        $logger->warning("Invalid fields login", ['session_id' => $_SESSION['id'], 'errors' => $errors, 'data' => $data]);
+        $logger->warning("Invalid fields login", ['session_id' => session_id(), 'errors' => $errors, 'data' => $data]);
         redirect_with_message("login", "Invalid fields");
     }
 
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     */
 
     // Log user log-in
-    $logger->info("User logged in", ['username' => $_POST["username"], 'session_id' => $_SESSION['id']]);
+    $logger->info("User logged in", ['username' => $_POST["username"], 'session_id' => session_id()]);
     
     redirect_to_page("index");
 }

@@ -1,8 +1,7 @@
 <?php
 require './db_manager.php';
 require_once './logger.php';
-
-session_start();
+require './config.php';
 
 $logger = Log::getInstance();
 

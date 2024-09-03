@@ -30,10 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate_fields("checkout", $data);
 
     if (count($errors) > 0) {
-        $logger->warning("Invalid fields during checkout", ['session_id' => $_SESSION['id'], 'user_id' => $_SESSION['user_id'], 'errors' => $errors, 'data' => $data]);
+        $logger->warning("Invalid fields during checkout", ['session_id' => session_id(), 'user_id' => $_SESSION['user_id'], 'errors' => $errors, 'data' => $data]);
         redirect_with_message("checkout", "Invalid fields");
     }
-    
 
     // Fetch the ids of the books in the cart
     $q1 = 'SELECT * FROM carts WHERE session_id= ?;';
@@ -58,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $r3 = $db->execute_query($q3, $params, $param_types);
         
         // Log orders
-        $logger->info("User placed an order", ['username' => $_POST["username"], 'book_id' => $item['book_id']]);
+        $logger->info("User placed an order", ['user_id' => $_SESSION["user_id"], 'book_id' => $item['book_id']]);
     }
     redirect_to_page("profile");
 }

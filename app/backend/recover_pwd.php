@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate_fields("recover_pwd", $data);
 
     if (count($errors) > 0) {
-        $logger->warning("Invalid fields in password recovery", ['session_id' => $_SESSION['id'], 'errors' => $errors, 'data' => $data]);
+        $logger->warning("Invalid fields in password recovery", ['session_id' => session_id(), 'errors' => $errors, 'data' => $data]);
         redirect_with_message("login", "Invalid fields");
     }
 
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $db->execute_query($query, $params, $param_types);
 
     if (empty($result)) {
-        $logger->warning("User inserted an expired number during password recovery", ['session_id' => $_SESSION['id'], 'username' => $_POST['username']]);
+        $logger->warning("User inserted an expired number during password recovery", ['session_id' => session_id(), 'username' => $_POST['username']]);
         redirect_with_message("login", "Number is discarded");
     }
     $correct_number = $result[0]['number'];

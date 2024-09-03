@@ -1,7 +1,7 @@
 <?php
 include_once './utils.php';
 require_once './logger.php';
-session_start();
+require './config.php';
 
 $logger = Log::getInstance();
 $user_id = $_SESSION['user_id'];

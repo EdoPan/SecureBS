@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate_fields("validate_change_pwd", $data);
 
     if (count($errors) > 0) {
-        $logger->warning("Invalid fields during password change", ['session_id' => $_SESSION['id'], 'user_id' => $_SESSION['user_id'], 'errors' => $errors, 'data' => $data]);
+        $logger->warning("Invalid fields during password change", ['session_id' => session_id(), 'user_id' => $_SESSION['user_id'], 'errors' => $errors, 'data' => $data]);
         redirect_to_page("profile");
     }
 

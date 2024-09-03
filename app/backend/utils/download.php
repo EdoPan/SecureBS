@@ -2,7 +2,7 @@
 require './db_manager.php';
 require_once './logger.php';
 require_once './utils.php';
-session_start();
+require './config.php';
 
 $logger = Log::getInstance();
 
