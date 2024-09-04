@@ -47,8 +47,12 @@ if ($action == 1) {
     $param_types = 'ii';
     $db->execute_query($q2, $params, $param_types);
 
-    $logger->info("User added a book to the cart", ['user_id' => $_SESSION['user_id'], 'book_id' => $book_id]);
-
+    if (isset($_SESSION['user_id'])) {
+        $logger->info("User added a book from to the cart", ['user_id' => $_SESSION['user_id'], 'book_id' => $book_id]);
+    } else {
+        $logger->info("User added a book from to the cart", ['session_id' => session_id(), 'book_id' => $book_id]);
+    }
+    
     header('Location: /index.php');
 
 } else if ($action == 2) {
@@ -75,7 +79,11 @@ if ($action == 1) {
     $param_types = 'si';
     $db->execute_query($q2, $params, $param_types);
 
-    $logger->info("User removed a book from to the cart", ['user_id' => $_SESSION['user_id'], 'book_id' => $book_id]);
+    if (isset($_SESSION['user_id'])) {
+        $logger->info("User removed a book from to the cart", ['user_id' => $_SESSION['user_id'], 'book_id' => $book_id]);
+    } else {
+        $logger->info("User removed a book from to the cart", ['session_id' => session_id(), 'book_id' => $book_id]);
+    }
 
     header('Location: /backend/cart.php');
 }
