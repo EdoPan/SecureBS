@@ -15,7 +15,7 @@
                 <input type="submit" value="Login">
             </form>
             <p>Not registered yet? <a href="./register.php">Register</a></p>
-            <p>Forgot your password? <a href="./recover.php">Recover</a></p>
+            <p>Forgot your password? <a href="./start_recover.php">Recover</a></p>
         </div>
         <script>
             const queryString = window.location.search;

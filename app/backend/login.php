@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result[0]["need_verification"] === 1){
         send_verification_code($username, $mail);
-        redirect_to_page("validate");
+        redirect_to_page("validate_login");
         exit();
     }
 
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $attempts += 1;
         if ($attempts > 4) {  
             send_verification_code($username, $mail);
-            redirect_to_page("validate");
+            redirect_to_page("validate_login");
             exit();
         }
         $logger->warning("User inserted a wrong password", ['username' => $_POST['username']]);

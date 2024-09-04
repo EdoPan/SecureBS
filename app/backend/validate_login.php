@@ -51,4 +51,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require '../frontend/validate.php';
+require '../frontend/validate_login.php';

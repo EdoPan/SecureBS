@@ -37,14 +37,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $username = $result[0]["username"];
     $email = $result[0]["email"];
+    $correct_password = $result[0]["password"];
 
     // check if the passwords are not equal
     $current_pwd = $_POST["current_pswd"];
     $new_pwd = $_POST["new_pswd"];
 
+    $wrong_current_pwd = password_verify($current_pwd, $correct_password);
+    if ($wrong_current_pwd === false) {
+        redirect_with_message("profile", "The current password is incorrect");
+    }
+
     if ($new_pwd === $current_pwd) {
         redirect_with_message("profile", "The new password must be different from the current one");
     }
+
+    
 
     send_change_password_code($username, $email);
     $_SESSION["new_pswd"] = password_hash($new_pwd, PASSWORD_DEFAULT);

@@ -15,7 +15,8 @@ INSERT INTO books (name, author, price, quantity) VALUES ("Atomic Habits", "Jame
 CREATE TABLE carts (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
   session_id TEXT NOT NULL,
-  book_id INTEGER NOT NULL
+  book_id INTEGER NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT current_timestamp()
 );
 
 -- create
@@ -23,17 +24,18 @@ CREATE TABLE users (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(20) NOT NULL,
   password VARCHAR(200) NOT NULL,
-  email VARCHAR(50) NOT NULL
+  email VARCHAR(50) NOT NULL,
+  need_verification tinyint(1) DEFAULT 0
   
 );
 
 -- create
 CREATE TABLE recovery_number (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
-  user_id VARCHAR(20) NOT NULL,
+  username varchar(20) NOT NULL,
   number INT NOT NULL,
   request_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  opertion VARCHAR(20) NOT NULL
+  operation VARCHAR(20) NOT NULL
  );
 
 -- create

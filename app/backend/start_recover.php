@@ -37,4 +37,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     redirect_to_page("recover_pwd");
 }
 
-require '../frontend/recover.php';
+require '../frontend/start_recover.php';

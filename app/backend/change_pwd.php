@@ -58,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correct_number = $result[0]['number'];
     $new_pwd = $_SESSION["new_pswd"];
     // print correct_number and number
-    echo "correct_number: $correct_number, number: $number";
     if ($number == $correct_number) {
         $query = "DELETE FROM recovery_number WHERE username = ? AND operation='change'";
         $params = [$username];
@@ -66,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db->execute_query($query, $params, $param_types);
 
         $query = "UPDATE users SET password=? WHERE username = ?";
-        $params = [$new_pwd, $_POST['username']];
+        $params = [$new_pwd, $username];
         $param_types = "ss";
         $db->execute_query($query, $params, $param_types);
 
@@ -76,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $logger->warning("User inserted an invalid number during changed password", ['username' => $username, 'wrong_number' => $number, 'correct_number' => $correct_number]);
 
-        redirect_with_message("change_pwd", "Invalid number, correct_number: $correct_number, number: $number");
+        redirect_with_message("change_pwd", "Invalid number");
     }
 }
 
