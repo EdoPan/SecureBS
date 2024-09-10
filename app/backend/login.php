@@ -26,14 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // CSRF token check
-    if(!isset($_POST['csrf']) || !is_string($_POST['csrf'])){
-        $logger->warning('Logout called without a CSRF token');
-        redirect_to_page("index");
-    }
-
     if(!verify_and_regenerate_csrf_token($_POST['csrf'])){
         $logger->warning("CSRF tokens do not match", ['csrf' => $_POST['csrf']]);
-        redirect_to_page("index");
+        redirect_to_page("login");
     }
 
     // check if the user exists
