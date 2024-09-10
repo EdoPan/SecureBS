@@ -10,7 +10,6 @@ if (empty( $books )) {
     $books = ['message' => 'No books available!'];
 }
 
-$books = escape_html_special_chars($books);
 
 if(isset($_COOKIE["PHPSESSID"])){
     header('Set-Cookie: PHPSESSID='.$_COOKIE["PHPSESSID"].'; SameSite=None');
