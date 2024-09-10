@@ -1,18 +1,18 @@
-# Protezione cookie di sessione
+# Session cookie protection
 php_value session.cookie_httponly 1
 php_value session.cookie_secure 1
 php_value session.cookie_samesite Lax
 
-# Impedire la visualizzazione del file .htaccess
+# Deny access to .htaccess file
 <Files .htaccess>
     Order allow,deny
     Deny from all
 </Files>
 
-# Disabilitare l'elenco delle directory
+# Disable directory listing
 Options -Indexes
 
-# Proteggere contro attacchi XSS e MIME sniffing
+# Protection againsts XSS e MIME sniffing attacks
 <IfModule mod_headers.c>
     Header set X-XSS-Protection "1; mode=block"
     Header set X-Content-Type-Options "nosniff"
@@ -20,23 +20,22 @@ Options -Indexes
     Header always set X-Frame-Options "SAMEORIGIN"
 </IfModule>
 
-# Abilitare la protezione CSRF e HSTS
 <IfModule mod_headers.c>
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
 </IfModule>
 
-# Proteggere l'accesso a file sensibili
+# Protection for sensitive files
 <FilesMatch "(\.ini|\.log|\.sh|\.sql|\.bak|\.old|\.json|\.xml|\.php)$">
     Order allow,deny
     Allow from all
 </FilesMatch>
 
-# Abilitare HTTPS se non già fatto
+# Enable HTTPS if is not already activated
 RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Limita il numero di richieste per prevenire attacchi DoS
+# Protection against DoS
 <IfModule mod_evasive.c>
     DOSHashTableSize 3097
     DOSPageCount 2
@@ -46,11 +45,7 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
     DOSBlockingPeriod 10
 </IfModule>
 
-# Disabilitare tracce e opzioni HTTP inutili
-# TraceEnable On
-# Header set Allow "GET,POST"
-
-# Protezione contro attacchi di clickjacking
+# Protection against clickjacking
 <IfModule mod_headers.c>
     Header always append X-Frame-Options DENY
 </IfModule>

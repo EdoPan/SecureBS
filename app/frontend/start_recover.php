@@ -10,6 +10,7 @@
             <form action="../backend/start_recover.php" method="post">
                 <label for="email">E-mail:</label><br>
                 <input type="text" id="email" name="email"><br><br>
+                <input type="hidden" name="csrf" value="<?php echo generate_or_get_csrf_token(); ?>">
                 <input type="submit" value="Recover">
             </form>
         </div>

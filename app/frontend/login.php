@@ -12,6 +12,7 @@
                 <input type="text" id="username" name="username"><br>
                 <label for="password">Password:</label><br>
                 <input type="password" id="password" name="password"><br><br>
+                <input type="hidden" name="csrf" value="<?php echo generate_or_get_csrf_token(); ?>">
                 <input type="submit" value="Login">
             </form>
             <p>Not registered yet? <a href="./register.php">Register</a></p>

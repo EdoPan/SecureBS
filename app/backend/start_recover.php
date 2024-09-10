@@ -3,6 +3,7 @@ require_once './utils/db_manager.php';
 require_once './utils/logger.php';
 include_once 'utils/utils.php';
 require './utils/config.php';
+require_once './utils/csrf.php';
 
 $logger = Log::getInstance();
 
@@ -15,6 +16,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (count($errors) > 0) {
         $logger->warning("Invalid fields for account recovery", ['session_id' => session_id(), 'errors' => $errors, 'data' => $data]);
         redirect_with_message("login", "Invalid fields");
+    }
+
+    // CSRF token check
+    if(!isset($_POST['csrf']) || !is_string($_POST['csrf'])){
+        $logger->warning('Logout called without a CSRF token');
+        redirect_to_page("index");
+    }
+
+    if(!verify_and_regenerate_csrf_token($_POST['csrf'])){
+        $logger->warning("CSRF tokens do not match", ['csrf' => $_POST['csrf']]);
+        redirect_to_page("index");
     }
 
     // check if the user exists

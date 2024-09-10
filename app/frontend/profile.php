@@ -13,7 +13,11 @@
                 <a href="./register.php">Register</a><br>
                 <?php } ?>
                 <a href="./profile.php">Profile</a><br>
-                <a href="./utils/logout.php">Logout</a>
+                <!--a href="./utils/logout.php">Logout</a-->
+                <form action="./utils/logout.php" method="post">
+                    <input type="hidden" name="csrf" value="<?php echo generate_or_get_csrf_token(); ?>">
+                    <input type="submit" value="Logout">
+                </form>
             </div>
             <div style="float: left; width: fit-content">
                 <h1>Profile</h1>
@@ -38,6 +42,7 @@
                     <input type="password" id="current_pswd" name="current_pswd"><br>
                     <label for="new_pswd">New password:</label><br>
                     <input type="password" id="new_pswd" name="new_pswd"><br><br>
+                    <input type="hidden" name="csrf" value="<?php echo generate_or_get_csrf_token(); ?>">
                     <input type="submit" value="Change password">
                 </form>
             </div>

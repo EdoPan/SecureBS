@@ -14,7 +14,11 @@
                 <?php } ?>
                 <?php if (isset($_SESSION['user_id'])) { ?>
                 <a href="./profile.php">Profile</a><br>
-                <a href="./utils/logout.php">Logout</a>
+                <!--a href="./utils/logout.php">Logout</a-->
+                <form action="./utils/logout.php" method="post">
+                    <input type="hidden" name="csrf" value="<?php echo generate_or_get_csrf_token(); ?>">
+                    <input type="submit" value="Logout">
+                </form>
                 <?php } ?>
             </div>
             <div style="float: left; width: fit-content">

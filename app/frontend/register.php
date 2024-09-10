@@ -16,6 +16,7 @@
                 <input type="password" id="password" name="password"><br>                
                 <label for="pswd">Confirm password:</label><br>
                 <input type="password" id="pswd" name="pswd"><br><br>
+                <input type="hidden" name="csrf" value="<?php echo generate_or_get_csrf_token(); ?>">
                 <input type="submit" value="Register">
             </form>
             <p>Already registered? <a href="./login.php">Login</a></p>

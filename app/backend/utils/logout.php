@@ -2,6 +2,7 @@
 include_once './utils.php';
 require_once './logger.php';
 require './config.php';
+require './csrf.php';
 
 $logger = Log::getInstance();
 $user_id = $_SESSION['user_id'];
@@ -10,6 +11,17 @@ $user_id = $_SESSION['user_id'];
 if (!isset($_SESSION['user_id'])) {
     redirect_with_message("index", "You are not logged in");
     exit;
+}
+
+// CSRF token check
+if(!isset($_POST['csrf']) || !is_string($_POST['csrf'])){
+    $logger->warning('Logout called without a CSRF token');
+    redirect_to_page("index");
+}
+
+if(!verify_and_regenerate_csrf_token($_POST['csrf'])){
+    $logger->warning("CSRF tokens do not match", ['csrf' => $_POST['csrf']]);
+    redirect_to_page("index");
 }
 
 // Unset all of the session variables.

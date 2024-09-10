@@ -3,6 +3,7 @@ require './utils/db_manager.php';
 require_once './utils/logger.php';
 include_once 'utils/utils.php';
 require './utils/config.php';
+require './utils/csrf.php';
 
 $logger = Log::getInstance();
 
@@ -22,6 +23,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (count($errors) > 0) {
         $logger->warning("Invalid fields for password change", ['session_id' => session_id(), 'errors' => $errors, 'data' => $data]);
         redirect_with_message("profile", "Invalid fields");
+    }
+
+    // CSRF token check
+    if(!isset($_POST['csrf']) || !is_string($_POST['csrf'])){
+        $logger->warning('Logout called without a CSRF token');
+        redirect_to_page("profile");
+    }
+
+    if(!verify_and_regenerate_csrf_token($_POST['csrf'])){
+        $logger->warning("CSRF tokens do not match", ['csrf' => $_POST['csrf']]);
+        redirect_to_page("profile");
     }
 
     // check if the user exists
@@ -51,8 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($new_pwd === $current_pwd) {
         redirect_with_message("profile", "The new password must be different from the current one");
     }
-
-    
 
     send_change_password_code($username, $email);
     $_SESSION["new_pswd"] = password_hash($new_pwd, PASSWORD_DEFAULT);

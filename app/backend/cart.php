@@ -1,6 +1,7 @@
 <?php 
 require './utils/db_manager.php';
 require './utils/config.php';
+require './utils/csrf.php';
 
 $db = DBManager::getInstance();
 $query = 'SELECT * FROM books INNER JOIN carts WHERE session_id = ? AND books.id=carts.book_id AND carts.created_at > NOW() - INTERVAL 15 MINUTE;';

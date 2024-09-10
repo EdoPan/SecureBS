@@ -26,7 +26,6 @@ CREATE TABLE users (
   password VARCHAR(200) NOT NULL,
   email VARCHAR(50) NOT NULL,
   need_verification tinyint(1) DEFAULT 0
-  
 );
 
 -- create

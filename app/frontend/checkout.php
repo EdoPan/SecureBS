@@ -30,6 +30,7 @@
             <input type="number" id="cvv" name="cvv"><br>
             <label for="card_owner">Card owner full name:</label><br>
             <input type="text" id="card_owner" name="card_owner"><br><br>
+            <input type="hidden" name="csrf" value="<?php echo generate_or_get_csrf_token(); ?>">
             <input type="submit" value="Buy now">
         </form>
         <script>

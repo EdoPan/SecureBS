@@ -1,7 +1,8 @@
 <?php 
 require './backend/utils/db_manager.php';
 require './backend/utils/utils.php';
-session_start();
+require './backend/utils/csrf.php';
+require './backend/utils/config.php';
 
 $db = DBManager::getInstance();
 $query = 'SELECT * FROM books;';

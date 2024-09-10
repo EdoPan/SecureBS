@@ -17,6 +17,7 @@
                 <input type="password" id="pwd" name="pwd"><br><br>
                 <label for="new_pwd">Repeat Password:</label><br>
                 <input type="password" id="new_pwd" name="new_pwd"><br><br>
+                <input type="hidden" name="csrf" value="<?php echo generate_or_get_csrf_token(); ?>">
                 <input type="submit" value="Recover">
             </form>
         </div>

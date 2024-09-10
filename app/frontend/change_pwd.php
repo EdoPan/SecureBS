@@ -11,6 +11,7 @@
             <form action="../backend/change_pwd.php" method="post">
                 <label for="number">Number:</label><br>
                 <input type="number" id="number" name="number"><br>
+                <input type="hidden" name="csrf" value="<?php echo generate_or_get_csrf_token(); ?>">
                 <input type="submit" value="Change">
             </form>
         </div>
