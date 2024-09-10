@@ -15,7 +15,7 @@ function validate_fields(string $page_name, array $data) : array {
 
     foreach ($rules as $field => $regex) {
         // Verifica se il campo esiste nei dati
-        if (!isset($data[$field])) {
+        if (!isset($data[$field]) || !is_string($data[$field])) {
             $errors[] = "Field '$field' is missing.";
             continue;
         }

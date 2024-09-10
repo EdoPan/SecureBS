@@ -19,15 +19,15 @@
                 <h1>Profile</h1>
                 <h2>General Info</h2>
                 <ul>
-                    <li><a><b>Username:</b> <?php echo $info[0]['username']; ?></a></li>
-                    <li><a><b>E-mail:</b> <?php echo $info[0]['email']; ?></a></li>
+                    <li><a><b>Username:</b> <?php echo htmlspecialchars($info[0]['username']); ?></a></li>
+                    <li><a><b>E-mail:</b> <?php echo htmlspecialchars($info[0]['email']); ?></a></li>
                 </ul>
 
                 <h2>Purchased Books</h2>
                 <ul>
                     <?php foreach($books as $book) : ?>
-                    <li><a href="../backend/utils/download.php?book_id=<?php echo urlencode($book['book_id']); ?>">
-                        <?php echo $book['name']; ?> - <?php echo $book['author']; ?><a> (<?php echo $book['price']; ?> €)</a>
+                    <li><a href="../backend/utils/download.php?book_id=<?php echo urlencode(htmlspecialchars($book['book_id'])); ?>">
+                        <?php echo htmlspecialchars($book['name']); ?> - <?php echo htmlspecialchars($book['author']); ?><a> (<?php echo htmlspecialchars($book['price']); ?> €)</a>
                         </a>
                     </li>
                     <?php endforeach; ?>

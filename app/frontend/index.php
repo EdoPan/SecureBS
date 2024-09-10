@@ -25,12 +25,12 @@
                         <?php foreach ($books as $book): ?>
                             <?php if (array_key_exists('message', $books)) { ?>
                                 <a>
-                                    Message: <?= $books['message']; ?>
+                                    Message: <?= htmlspecialchars($books['message']); ?>
                                 </a>
                             <?php } else { ?>
                                 <li>
-                                    <?= $book['name']; ?> - <?= $book['author']; ?> (<?= $book['price']; ?> €)
-                                    [<?= $book['quantity']; ?>]
+                                    <?= htmlspecialchars($book['name']); ?> - <?= htmlspecialchars($book['author']); ?> (<?= htmlspecialchars($book['price']); ?> €)
+                                    [<?= htmlspecialchars($book['quantity']); ?>]
                                     <?php if ($book['quantity'] != 0) { ?>
                                         <a href="./backend/utils/manage_cart.php?id=<?php echo urlencode($book['id']); ?>&action=1">Add
                                             to cart</a>

@@ -23,10 +23,10 @@
                         <?php foreach($items as $item) : ?>
                         <?php if(array_key_exists('message', $items)) { ?>
                         <a>
-                            Message: <?=$items['message']; ?><br><br>
+                            Message: <?=htmlspecialchars($items['message']); ?><br><br>
                         </a>
                         <?php } else { ?>
-                        <li><?=$item['name']; ?> - <?=$item['author']; ?>  (<?=$item['price']; ?> €)
+                        <li><?=htmlspecialchars($item['name']); ?> - <?=htmlspecialchars($item['author']); ?>  (<?=htmlspecialchars($item['price']); ?> €)
                         <a href="../backend/utils/manage_cart.php?id=<?php echo urlencode($item['book_id']); ?>&action=2">Remove</a>
                         </li><br>
                         <?php }; ?>

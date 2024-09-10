@@ -29,3 +29,4 @@ services:
       - 443:443
     volumes:
       - ./app:/var/www/securebs
+      - "./app.htaccess:/var/www/html/.htaccess"

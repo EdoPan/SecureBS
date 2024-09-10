@@ -9,7 +9,7 @@
         <h2>Articles</h2>
         <ul>
             <?php foreach($items as $item) : ?>
-            <li><?=$item['name']; ?> - <?=$item['author']; ?>  (<?=$item['price']; ?> €)</li><br>
+            <li><?=htmlspecialchars($item['name']); ?> - <?=htmlspecialchars($item['author']); ?>  (<?=htmlspecialchars($item['price']); ?> €)</li><br>
             <?php endforeach; ?>
             <a><b>Shipping: </b><?php echo $shipping ?> €</a><br>
             <a><b>Total: </b><?php echo $total + $shipping ?> €</a><br><br>
