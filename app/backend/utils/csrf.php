@@ -1,7 +1,7 @@
 <?php
 
 function generate_csrf_token() {
-    $token = md5(uniqid(mt_rand(), true));
+    $token = bin2hex(random_bytes(32));
     $_SESSION['csrf'] = $token;
     return $token;
 }
